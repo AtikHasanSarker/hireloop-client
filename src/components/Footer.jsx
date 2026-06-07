@@ -1,0 +1,142 @@
+"use client";
+
+import Link from "next/link";
+import { FaFacebookF, FaPinterestP, FaLinkedinIn } from "react-icons/fa";
+
+export default function Footer() {
+  return (
+    <footer className="bg-black text-gray-400">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+          {/* Left Side */}
+          <div>
+            <h2 className="text-4xl font-extrabold">
+              <span className="text-sky-500">hire</span>
+              <span className="text-orange-500">loop</span>
+            </h2>
+
+            <p className="mt-6 max-w-sm text-sm leading-7 text-gray-500">
+              The AI-native career platform. Built for people who take their
+              work seriously.
+            </p>
+
+            <div className="mt-16 flex items-center gap-3">
+              <Link
+                href="#"
+                className="flex h-10 w-10 items-center justify-center rounded-md bg-zinc-900 transition hover:bg-zinc-800"
+              >
+                <FaFacebookF size={16} />
+              </Link>
+
+              <Link
+                href="#"
+                className="flex h-10 w-10 items-center justify-center rounded-md bg-indigo-600 text-white transition hover:bg-indigo-500"
+              >
+                <FaPinterestP size={16} />
+              </Link>
+
+              <Link
+                href="#"
+                className="flex h-10 w-10 items-center justify-center rounded-md bg-zinc-900 transition hover:bg-zinc-800"
+              >
+                <FaLinkedinIn size={16} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Product */}
+          <div>
+            <h3 className="mb-6 text-sm font-semibold text-indigo-500">
+              Product
+            </h3>
+
+            <ul className="space-y-4 text-sm">
+              <li>
+                <Link href="#" className="hover:text-white">
+                  Job discovery
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-white">
+                  Worker AI
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-white">
+                  Companies
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-white">
+                  Salary data
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Navigations */}
+          <div>
+            <h3 className="mb-6 text-sm font-semibold text-indigo-500">
+              Navigations
+            </h3>
+
+            <ul className="space-y-4 text-sm">
+              <li>
+                <Link href="#" className="hover:text-white">
+                  Help center
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-white">
+                  Career library
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-white">
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h3 className="mb-6 text-sm font-semibold text-indigo-500">
+              Resources
+            </h3>
+
+            <ul className="space-y-4 text-sm">
+              <li>
+                <Link href="#" className="hover:text-white">
+                  Brand Guideline
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-white">
+                  Newsroom
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-sm text-gray-600 md:flex-row">
+          <p>Copyright 2024 — Programming Hero</p>
+
+          <div className="flex gap-4">
+            <Link href="#" className="hover:text-white">
+              Terms & Policy
+            </Link>
+
+            <span>-</span>
+
+            <Link href="#" className="hover:text-white">
+              Privacy Guideline
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

@@ -1,13 +1,68 @@
-import { useState } from "react";
-import { Link, Button } from "@heroui/react";
+"use client";
 
-export default function App() {
+import { useState } from "react";
+import Link from "next/link";
+import { Button } from "@heroui/react";
+
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const navLinks = [
+    { label: "Browse Jobs", href: "#" },
+    { label: "Company", href: "#" },
+    { label: "Pricing", href: "#" },
+  ];
+
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
-      <header className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        <div className="flex items-center gap-4">
+    <div className="w-full bg-[#0B0B12] py-4">
+      <nav className="mx-auto max-w-7xl px-4">
+        <div className="flex h-16 items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-6 backdrop-blur-xl">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <h1 className="text-3xl font-extrabold tracking-tight">
+              <span className="text-sky-500">hire</span>
+              <span className="text-orange-500">loop</span>
+            </h1>
+          </Link>
+
+          {/* Right Section */}
+          <div className="hidden ml-auto items-center md:flex">
+            {/* Nav Links */}
+            <ul className="flex items-center gap-10">
+              {navLinks.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm font-medium text-gray-300 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Divider */}
+            <div className="mx-8 h-6 w-px bg-white/15" />
+
+            {/* Auth Actions */}
+            <div className="flex items-center gap-6">
+              <Link
+                href="#"
+                className="text-sm font-medium text-[#7B6CFF] hover:text-[#8F82FF]"
+              >
+                Sign In
+              </Link>
+
+              <Button
+                radius="lg"
+                className="h-11 bg-gradient-to-r from-[#6E5BFF] to-[#5C6CFF] px-6 font-medium text-white"
+              >
+                Get Started
+              </Button>
+            </div>
+          </div>
+
+          {/* Mobile Toggle */}
           <button
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -38,60 +93,35 @@ export default function App() {
               )}
             </svg>
           </button>
-          <div className="flex items-center gap-3">
-            <Logo />
-            <p className="font-bold">ACME</p>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="mt-3 rounded-2xl border border-white/10 bg-[#111118] p-5 md:hidden">
+            <div className="flex flex-col gap-4">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="text-gray-300 hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+
+              <div className="mt-2 border-t border-white/10 pt-4">
+                <Link href="#" className="mb-4 block text-[#7B6CFF]">
+                  Sign In
+                </Link>
+
+                <Button className="w-full bg-linear-to-r from-[#6E5BFF] to-[#5C6CFF] text-white">
+                  Get Started
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
-        <ul className="hidden items-center gap-4 md:flex">
-          <li>
-            <Link href="#">Features</Link>
-          </li>
-          <li>
-            <Link
-              href="#"
-              className="font-medium text-accent"
-              aria-current="page"
-            >
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link href="#">Pricing</Link>
-          </li>
-        </ul>
-        <div className="hidden items-center gap-4 md:flex">
-          <Link href="#">Login</Link>
-          <Button>Sign Up</Button>
-        </div>
-      </header>
-      {isMenuOpen && (
-        <div className="border-t border-separator md:hidden">
-          <ul className="flex flex-col gap-2 p-4">
-            <li>
-              <Link href="#" className="block py-2">
-                Features
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="block py-2 font-medium text-accent">
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="block py-2">
-                Pricing
-              </Link>
-            </li>
-            <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-              <Link href="#" className="block py-2">
-                Login
-              </Link>
-              <Button className="w-full">Sign Up</Button>
-            </li>
-          </ul>
-        </div>
-      )}
-    </nav>
+        )}
+      </nav>
+    </div>
   );
 }
