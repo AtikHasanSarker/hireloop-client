@@ -2,9 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@heroui/react";
+import { Avatar, Button, Dropdown, Label } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { MdLogout } from "react-icons/md";
+import { AiOutlineUser } from "react-icons/ai";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
+  const router = useRouter()
+   const { data: session, isPending } = authClient.useSession();
+   const user = session?.user;
+   
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
@@ -13,9 +22,15 @@ export default function Navbar() {
     { label: "Pricing", href: "#" },
   ];
 
+   const handleLogout = async () => {
+     await authClient.signOut();
+     toast.success("Logout Successfully!");
+     router.refresh();
+   };
+
   return (
-    <div className="w-full bg-[#0B0B12] py-4">
-      <nav className="mx-auto max-w-7xl px-4">
+    <div className="px-6 absolute top-0 left-0 right-0 z-50">
+      <nav className="w-full max-w-7xl  py-10 z-50 mx-auto px-6">
         <div className="flex h-16 items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-6 backdrop-blur-xl">
           {/* Logo */}
           <Link href="/" className="flex items-center">
@@ -45,20 +60,85 @@ export default function Navbar() {
             <div className="mx-8 h-6 w-px bg-white/15" />
 
             {/* Auth Actions */}
-            <div className="flex items-center gap-6">
-              <Link
-                href="#"
-                className="text-sm font-medium text-[#7B6CFF] hover:text-[#8F82FF]"
-              >
-                Sign In
-              </Link>
+            <div>
+              {user ? (
+                <div>
+                  {isPending ? (
+                    <p>loading...</p>
+                  ) : (
+                    <Dropdown>
+                      <Button aria-label="Menu" className="p-0 w-fit">
+                        <Avatar>
+                          <Avatar.Image
+                            referrerPolicy="no-referrer"
+                            alt={user?.name}
+                            src={user?.image}
+                          />
+                          <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
+                        </Avatar>
+                      </Button>
 
-              <Button
-                radius="lg"
-                className="h-11 bg-gradient-to-r from-[#6E5BFF] to-[#5C6CFF] px-6 font-medium text-white"
-              >
-                Get Started
-              </Button>
+                      <Dropdown.Popover>
+                        <Dropdown.Menu
+                          onAction={(key) => console.log(`Selected: ${key}`)}
+                        >
+                          <Dropdown.Item
+                            id="userName"
+                            onClick={() => router.push("/profile")}
+                            textValue={user?.name}
+                          >
+                            <Label className="font-semibold">
+                              <p className="font-medium mr-3 hidden lg:block">
+                                Hello, {user?.name.split(" ")[0]}
+                              </p>
+                            </Label>
+                          </Dropdown.Item>
+
+                          <Dropdown.Item
+                            id="profile"
+                            onClick={() => router.push("/profile")}
+                            textValue="Profile"
+                          >
+                            <Label className="cursor-pointer flex gap-2 items-center font-semibold">
+                              <AiOutlineUser />
+                              Profile
+                            </Label>
+                          </Dropdown.Item>
+
+                          <Dropdown.Item
+                            id="logout"
+                            onClick={handleLogout}
+                            textValue="Logout"
+                          >
+                            <Label className="text-red-600 cursor-pointer flex gap-2 items-center font-semibold">
+                              <MdLogout />
+                              Logout
+                            </Label>
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown.Popover>
+                    </Dropdown>
+                  )}{" "}
+                </div>
+              ) : (
+                <div className="flex items-center gap-6">
+                  <Link
+                    href="/signin"
+                    className="text-sm font-medium text-[#7B6CFF] hover:text-[#8F82FF]"
+                  >
+                    Sign In
+                  </Link>
+
+                  <Link href="/signup">
+                    <Button
+                      radius="lg"
+                      className="h-11 bg-linear-to-r from-[#6E5BFF] to-[#5C6CFF] px-6 font-medium text-white"
+                    >
+                      Get Started
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
 
@@ -100,23 +180,80 @@ export default function Navbar() {
           <div className="mt-3 rounded-2xl border border-white/10 bg-[#111118] p-5 md:hidden">
             <div className="flex flex-col gap-4">
               {navLinks.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="text-gray-300 hover:text-white"
-                >
-                  {item.label}
+                <Link key={item.label} href={item.href}>
+                  <Button className="text-gray-300 hover:text-white">
+                    {item.label}
+                  </Button>
                 </Link>
               ))}
 
-              <div className="mt-2 border-t border-white/10 pt-4">
-                <Link href="#" className="mb-4 block text-[#7B6CFF]">
-                  Sign In
-                </Link>
+              <div>
+                {user ? (
+                  <div className="">
+                    <Dropdown>
+                      <Button aria-label="Menu">
+                        <Avatar>
+                          <Avatar.Image
+                            referrerPolicy="no-referrer"
+                            alt={user?.name}
+                            src={user?.image}
+                          />
+                          <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>
+                        </Avatar>
+                      </Button>
 
-                <Button className="w-full bg-linear-to-r from-[#6E5BFF] to-[#5C6CFF] text-white">
-                  Get Started
-                </Button>
+                      <Dropdown.Popover>
+                        <Dropdown.Menu
+                          onAction={(key) => console.log(`Selected: ${key}`)}
+                        >
+                          <Dropdown.Item
+                            id="userName"
+                            onClick={() => router.push("/profile")}
+                            textValue={user.name}
+                          >
+                            <Label className="font-semibold">
+                              <p className="font-medium mr-3 hidden lg:block">
+                                Hello, {user.name.split(" ")[0]}
+                              </p>
+                            </Label>
+                          </Dropdown.Item>
+
+                          <Dropdown.Item
+                            id="profile"
+                            onClick={() => router.push("/profile")}
+                            textValue="Profile"
+                          >
+                            <Label className="cursor-pointer flex gap-2 items-center font-semibold">
+                              <AiOutlineUser />
+                              Profile
+                            </Label>
+                          </Dropdown.Item>
+
+                          <Dropdown.Item
+                            id="logout"
+                            onClick={handleLogout}
+                            textValue="Logout"
+                          >
+                            <Label className="text-red-600 cursor-pointer flex gap-2 items-center font-semibold">
+                              <MdLogout />
+                              Logout
+                            </Label>
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown.Popover>
+                    </Dropdown>
+                  </div>
+                ) : (
+                  <div className="mt-2 border-t border-white/10 pt-4">
+                    <Link href="#" className="mb-4 block text-[#7B6CFF]">
+                      Sign In
+                    </Link>
+
+                    <Button className="w-full bg-linear-to-r from-[#6E5BFF] to-[#5C6CFF] text-white">
+                      Get Started
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

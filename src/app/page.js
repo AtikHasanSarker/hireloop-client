@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Banner from "@/components/Banner";
 
 export default function Home() {
   return (
-    <div className="min-h-screen text-center text-4xl">
-      Homepage
+    <div>
+      <Banner></Banner>
     </div>
   );
 }
