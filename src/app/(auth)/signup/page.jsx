@@ -31,7 +31,7 @@ export default function SignupPage() {
     });
     if(data){
       toast.success("You have Registered Successfully!")
-      router.push("/signin")
+      router.push("/dashboard")
     }else{
       toast.error("Registration Failed!")
     }
