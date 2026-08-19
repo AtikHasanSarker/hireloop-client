@@ -97,11 +97,11 @@ export default function Navbar() {
 
                           <Dropdown.Item
                             id="profile"
-                            onClick={() => router.push("/profile")}
-                            textValue="Profile"
+                            onClick={() => router.push("/dashboard/recruiter")}
+                            textValue="Dashboard"
                           >
                             <Label className="cursor-pointer flex gap-2 items-center font-semibold">
-                              <LayoutDashboard/>
+                              <LayoutDashboard />
                               Dashboard
                             </Label>
                           </Dropdown.Item>
