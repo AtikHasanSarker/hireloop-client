@@ -31,8 +31,8 @@ import {
 import { createCompany } from "@/lib/ations/companies";
 import toast from "react-hot-toast";
 
-export default function CompanyProfile({ user }) {
-  const [company, setCompany] = useState(null); // Set to object when registered
+export default function CompanyProfile({ recruiter, recruiterCompany }) {
+  const [company, setCompany] = useState(recruiterCompany); 
   const [isOpen, setIsOpen] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [logoUrl, setLogoUrl] = useState("");
@@ -85,6 +85,7 @@ export default function CompanyProfile({ user }) {
     }
 
     const payload = {
+      recruiterId: recruiter.id,
       name: data.companyName,
       industry: data.industry || "Technology",
       websiteUrl: `https://${data.websiteUrl}`,
@@ -92,10 +93,12 @@ export default function CompanyProfile({ user }) {
       employeeCount: data.employeeCount || "1-10 employees",
       description: data.description,
       logo: logoUrl || "https://via.placeholder.com/150",
-      status: company?.status || "Pending", // Default status is Pending
+      status: company?.status || "Pending", 
     };
 
     setCompany(payload);
+
+    console.log(payload);
 
     // Create company
     const res = await createCompany(payload);
@@ -106,8 +109,6 @@ export default function CompanyProfile({ user }) {
     setIsOpen(false);
     setErrors({});
   };
-
-  console.log("Submitted company:", company);
 
   // Status Badge Helper
   const renderStatusBadge = (status) => {

@@ -8,6 +8,7 @@ import { MdLogout } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { LayoutDashboard } from "lucide-react";
 
 export default function Navbar() {
   const router = useRouter()
@@ -91,6 +92,17 @@ export default function Navbar() {
                               <p className="font-medium mr-3 hidden lg:block">
                                 Hello, {user?.name.split(" ")[0]}
                               </p>
+                            </Label>
+                          </Dropdown.Item>
+
+                          <Dropdown.Item
+                            id="profile"
+                            onClick={() => router.push("/profile")}
+                            textValue="Profile"
+                          >
+                            <Label className="cursor-pointer flex gap-2 items-center font-semibold">
+                              <LayoutDashboard/>
+                              Dashboard
                             </Label>
                           </Dropdown.Item>
 

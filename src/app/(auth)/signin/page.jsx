@@ -161,18 +161,11 @@ export default function SignInPage() {
                 Don&apos;t have an account?
               </span>
 
-              <Link href="/signup">
-                <span
-                  className="
-                  ml-2
-                  text-sm
-                  font-medium
-                  text-violet-400
-                  hover:text-violet-300
-                "
-                >
-                  Create Account
-                </span>
+              <Link
+                href="/signup"
+                className="ml-2 text-sm font-medium text-violet-400 hover:text-violet-300"
+              >
+                Create Account
               </Link>
             </div>
           </div>
