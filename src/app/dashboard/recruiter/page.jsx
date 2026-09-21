@@ -31,7 +31,6 @@ const RecruiterHomePage = () => {
     ];
     const {data: session} = useSession()
     const user = session?.user
-    console.log(user)
     return (
       <div className="p-6">
         <h2 className=" text-4xl mb-10">Welcome Back, {user?.name}</h2>

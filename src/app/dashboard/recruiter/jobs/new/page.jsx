@@ -1,6 +1,6 @@
 import React from 'react';
 import PostJobForm from './PostJobForm';
-import { getLoggedRecruiterCompany } from '@/lib/ations/companies';
+import { getLoggedRecruiterCompany } from '@/lib/actions/companies';
 
 const PostJobPage = async () => {
     const company = await getLoggedRecruiterCompany();

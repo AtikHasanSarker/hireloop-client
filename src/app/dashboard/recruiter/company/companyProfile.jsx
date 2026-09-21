@@ -28,7 +28,7 @@ import {
   textInputClass,
   triggerClasses,
 } from "@/components/style";
-import { createCompany } from "@/lib/ations/companies";
+import { createCompany } from "@/lib/actions/companies";
 import toast from "react-hot-toast";
 
 export default function CompanyProfile({ recruiter, recruiterCompany }) {

@@ -17,7 +17,7 @@ import {
 import { Briefcase, Globe } from "@gravity-ui/icons";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
-import { createJob } from "@/lib/ations/jobs";
+import { createJob } from "@/lib/actions/jobs";
 
 export default function PostJobForm({ company }) {
   const [isRemote, setIsRemote] = useState(false);
