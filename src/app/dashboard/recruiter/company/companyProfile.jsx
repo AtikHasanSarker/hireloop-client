@@ -143,7 +143,7 @@ export default function CompanyProfile({ recruiter, recruiterCompany }) {
   return (
     <div className="max-w-4xl mx-auto p-6 text-white">
       {/* 1. NO COMPANY REGISTERED STATE */}
-      {!company && !isOpen && (
+      {!company?._id && !isOpen && (
         <div className="border border-zinc-800 bg-zinc-950 rounded-2xl p-12 text-center space-y-4">
           <div className="w-12 h-12 bg-zinc-900 border border-zinc-800 rounded-full flex items-center justify-center mx-auto text-zinc-400">
             <Globe size={24} />

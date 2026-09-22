@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import globe from "../../public/images/globe.png";
 import { IoLocationOutline, IoSearchOutline } from "react-icons/io5";
@@ -41,13 +41,7 @@ export default function Banner() {
           src={globe}
           alt="Globe"
           priority
-          className="
-            w-full
-            max-w-none
-            opacity-90
-            select-none
-            pointer-events-none
-          "
+          className="w-full max-w-none opacity-90 select-none pointer-events-none"
         />
       </div>
 
@@ -123,8 +117,6 @@ export default function Banner() {
 
         {/* Globe Text */}
         <div className="mt-80">
-        
-
           <h2 className="mx-auto text-center max-w-2xl text-2xl font-medium leading-snug md:text-4xl my-18">
             Assisting over 15,000 job seekers
             <br />
@@ -135,20 +127,7 @@ export default function Banner() {
             {stats.map((item) => (
               <div
                 key={item.label}
-                className="
-                w-full
-                space-y-8
-                text-left
-                rounded-2xl
-                border
-                border-white/10
-                bg-linear-to-b
-                from-[#101015]
-                to-[#2b2b2f]
-                p-7
-                backdrop-blur-xl
-                
-              "
+                className="w-full space-y-8 text-left rounded-2xl border border-white/10 bg-linear-to-b from-[#101015] to-[#2b2b2f] p-7 backdrop-blur-xl"
               >
                 {" "}
                 <span className="text-2xl ">{item.icon}</span>

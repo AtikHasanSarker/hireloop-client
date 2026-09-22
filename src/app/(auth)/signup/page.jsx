@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Card, Separator, Form, RadioGroup, Radio } from "@heroui/react";
+import { Button, Card, Separator, Form, RadioGroup, Radio, Spinner } from "@heroui/react";
 import {
   Envelope,
   Eye,
@@ -17,8 +17,10 @@ import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const router= useRouter()
+  const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const user = Object.fromEntries(form.entries());
@@ -35,6 +37,7 @@ export default function SignupPage() {
     }else{
       toast.error("Registration Failed!")
     }
+    setLoading(false);
   };
 
 
@@ -123,12 +126,6 @@ export default function SignupPage() {
                   if (value.length < 8) {
                     return "Password must be at least 8 characters";
                   }
-                  if (!/[A-Z]/.test(value)) {
-                    return "Password must contain at least one uppercase letter";
-                  }
-                  if (!/[0-9]/.test(value)) {
-                    return "Password must contain at least one number";
-                  }
                   return null;
                 }}
               >
@@ -166,7 +163,7 @@ export default function SignupPage() {
                 <Label>Your Role</Label>
                 <RadioGroup
                   className=""
-                  defaultValue='seeker'
+                  defaultValue="seeker"
                   name="role"
                   orientation="horizontal"
                 >
@@ -191,17 +188,10 @@ export default function SignupPage() {
 
               <Button
                 type="submit"
-                className="
-                  h-12
-                  w-full
-                  bg-linear-to-r
-                  from-violet-600
-                  to-indigo-600
-                  
-                  font-medium
-                "
+                className="h-12 w-full bg-linear-to-r from-violet-600 to-indigo-600 font-medium"
+                disabled={loading}
               >
-                Create Account
+                {loading ? <Spinner color="white" size="sm" /> : "Create Account"}
               </Button>
             </Form>
 
