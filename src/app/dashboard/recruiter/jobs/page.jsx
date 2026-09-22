@@ -2,10 +2,11 @@ import { getCompanyJobs } from "@/lib/api/jobs";
 import React from "react";
 import { Table, Chip, Button, Tooltip } from "@heroui/react";
 import { Eye, Edit2, Trash2 } from "lucide-react";
+import { getLoggedRecruiterCompany } from "@/lib/actions/companies";
 
 const RecruiterJobs = async () => {
-  const companyId = "company_123";
-  const jobs = (await getCompanyJobs(companyId)) || [];
+  const company = await getLoggedRecruiterCompany();
+  const jobs = (await getCompanyJobs(company._id)) || [];
 
   const getStatusColor = (status) => {
     switch (status?.toLowerCase()) {
