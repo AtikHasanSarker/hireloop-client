@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import { createJob } from "@/lib/actions/jobs";
 
 export default function PostJobForm({ company }) {
+  
   const [isRemote, setIsRemote] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -57,9 +58,9 @@ export default function PostJobForm({ company }) {
     const payload = {
       ...data,
       isRemote,
-      companyId: company._id,
-      companyName: company.name,
-      companyLogo: company.logo,
+      companyId: company?._id,
+      companyName: company?.name,
+      companyLogo: company?.logo,
       status: "active",
       isPubliclyVisible: true,
     };
