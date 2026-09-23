@@ -18,9 +18,9 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Browse Jobs", href: "#" },
-    { label: "Companies", href: "#" },
-    { label: "Pricing", href: "#" },
+    { label: "Browse Jobs", href: "/jobs" },
+    { label: "Companies", href: "/companies" },
+    { label: "Pricing", href: "/pricing" },
   ];
 
   const handleLogout = async () => {
@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <div className="px-6 absolute top-0 left-0 right-0 z-50">
-      <nav className="w-full max-w-7xl  py-10 z-50 mx-auto px-6">
+      <nav className="w-full max-w-7xl  py-10 z-50 mx-auto px-6 sticky top-10">
         <div className="flex h-16 items-center justify-between rounded-2xl border border-white/10 bg-white/3 px-6 backdrop-blur-xl">
           {/* Logo */}
           <Link href="/" className="flex items-center">

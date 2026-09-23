@@ -43,7 +43,6 @@ export function DashboardSidebar() {
       <Drawer>
         <Button variant="secondary" className="lg:hidden">
           <LayoutSideContentLeft />
-          Sidebar
         </Button>
         <Drawer.Backdrop>
           <Drawer.Content placement="left">
