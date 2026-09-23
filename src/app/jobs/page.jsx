@@ -1,5 +1,5 @@
+import JobListingContainer from "@/components/jobs/JobListingContainer";
 
-import JobCard from "@/components/jobs/JobCard";
 import { getJobs } from "@/lib/api/jobs";
 
 const JobsPage = async () => {
@@ -16,22 +16,9 @@ const JobsPage = async () => {
         </p>
       </div>
 
-      {/* Job Cards */}
-      {jobs.length > 0 ? (
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {jobs.map((job) => (
-            <JobCard key={job._id} job={job} />
-          ))}
-        </div>
-      ) : (
-        <div className="rounded-2xl border border-default p-10 text-center">
-          <p className="text-muted-foreground">
-            No jobs available at the moment.
-          </p>
-        </div>
-      )}
+      <JobListingContainer jobs={jobs} />
     </section>
   );
-}
+};
 
 export default JobsPage;
