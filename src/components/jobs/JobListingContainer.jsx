@@ -10,8 +10,6 @@ const JobListingContainer = ({ jobs = [] }) => {
     search: "",
     category: null,
     jobType: null,
-    workMode: null,
-    salary: null,
   });
 
   const filteredJobs = useMemo(() => {
@@ -45,43 +43,6 @@ const JobListingContainer = ({ jobs = [] }) => {
       result = result.filter((job) => job.jobType === filters.jobType);
     }
 
-    /* ---------------- Work Mode ---------------- */
-
-    if (filters.workMode) {
-      if (filters.workMode === "remote") {
-        result = result.filter((job) => job.isRemote === true);
-      }
-
-      if (filters.workMode === "onsite") {
-        result = result.filter((job) => job.isRemote === false);
-      }
-    }
-
-    /* ---------------- Salary ---------------- */
-
-    if (filters.salary) {
-      result = result.filter((job) => {
-        const minSalary = Number(job.minSalary || 0);
-        const maxSalary = Number(job.maxSalary || 0);
-
-        switch (filters.salary) {
-          case "50000":
-            return maxSalary >= 50000;
-
-          case "100000":
-            return maxSalary >= 100000;
-
-          case "150000":
-            return maxSalary >= 150000;
-
-          case "200000":
-            return maxSalary >= 200000;
-
-          default:
-            return true;
-        }
-      });
-    }
 
     return result;
   }, [jobs, filters]);

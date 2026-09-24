@@ -1,6 +1,7 @@
 import { CircleDollar, } from "@gravity-ui/icons";
 import { Card } from "@heroui/react";
 import { ArrowUpRight, Briefcase, Calendar, Clock, Laptop, MapPin } from "lucide-react";
+import Link from "next/link";
 
 export default function JobCard({ job }) {
   const formatSalary = () => {
@@ -53,13 +54,13 @@ export default function JobCard({ job }) {
         </div>
 
         {/* Job Category */}
-        <span className="shrink-0 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary capitalize text-muted">
+        <span className="shrink-0 rounded-full bg-primary/10 px-3 text-xs font-medium text-primary capitalize text-muted">
           {job.jobCategory}
         </span>
       </Card.Header>
 
       {/* Content */}
-      <Card.Content className="px-2 pb-5">
+      <Card.Content className="px-2 pb-3">
         <div className="flex flex-wrap gap-x-2 gap-y-3 text-sm text-muted-foreground">
           {/* Job Type */}
           <div className="flex items-center py-1 px-3 rounded-3xl bg-cyan-950 gap-2">
@@ -122,17 +123,15 @@ export default function JobCard({ job }) {
 
       {/* Footer */}
       <Card.Footer
-        className="flex items-center justify-between gap-4 border-t border-default px-6 py-3"
+        className="flex items-center justify-between gap-4 border-t border-default px-4 py-2"
       >
-        <a
-          href={job.applyLink || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/40"
+        <Link
+          href={`/jobs/${job._id}`}
+          className="inline-flex items-center gap-2  px-5 py-2 font-semibold text-primary-foreground transition hover:text-purple-600"
         >
           Apply Now
           <ArrowUpRight className="size-4" />
-        </a>
+        </Link>
       </Card.Footer>
     </Card>
   );

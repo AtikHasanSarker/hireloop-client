@@ -21,8 +21,6 @@ const JobFilters = ({ jobs = [], filters, onFiltersChange }) => {
       search: "",
       category: null,
       jobType: null,
-      workMode: null,
-      salary: null,
     });
   };
 
