@@ -7,11 +7,13 @@ import { Envelope, Eye, EyeSlash, ShieldKeyhole } from "@gravity-ui/icons";
 import { InputGroup, Label, TextField } from "@heroui/react";
 import { signIn } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignInPage() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect" || "/");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,25 +24,18 @@ export default function SignInPage() {
       password: user.password,
     });
     if (data) {
-      toast.success("Sign In Successful!");
-      router.push("/");
+      toast.success("Sign In Successful! Redirecting...");
+      router.push(redirectTo);
     } else {
       toast.error("Sign In Failed!");
     }
   };
 
   return (
-    <main className="min-h-screen bg-[#07070A] pt-40">
+    <main className="min-h-screen bg-[#07070A] pt-30">
       <div className="container mx-auto flex min-h-screen items-center justify-center px-4 py-10">
         <Card
-          className="
-            w-full
-            max-w-md
-            border
-            border-white/10
-            bg-white/[0.03]
-            backdrop-blur-xl
-          "
+          className="w-full max-w-md border border-white/10 bg-white/3 backdrop-blur-xl"
         >
           <div className="p-8">
             {/* Header */}
@@ -94,12 +89,6 @@ export default function SignInPage() {
                   if (value.length < 8) {
                     return "Password must be at least 8 characters";
                   }
-                  if (!/[A-Z]/.test(value)) {
-                    return "Password must contain at least one uppercase letter";
-                  }
-                  if (!/[0-9]/.test(value)) {
-                    return "Password must contain at least one number";
-                  }
                   return null;
                 }}
               >
@@ -141,15 +130,7 @@ export default function SignInPage() {
               {/* Submit */}
               <Button
                 type="submit"
-                className="
-                  h-12
-                  w-full
-                  bg-linear-to-r
-                  from-violet-600
-                  to-indigo-600
-                  
-                  font-medium
-                "
+                className="h-12 w-full bg-linear-to-r from-violet-600 to-indigo-600 font-medium"
               >
                 Sign In
               </Button>
@@ -162,7 +143,7 @@ export default function SignInPage() {
               </span>
 
               <Link
-                href="/signup"
+                href={`/signup?redirect=${redirectTo}`}
                 className="ml-2 text-sm font-medium text-violet-400 hover:text-violet-300"
               >
                 Create Account

@@ -164,8 +164,8 @@ const NotFound = () => {
 
           {/* Description */}
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400 md:text-lg">
-            The page you're looking for doesn't exist or may have been moved.
-            Let's get you back on track.
+            The page you&apos;re looking for doesn&apos;t exist.
+            Let&apos;s get you back on track.
           </p>
 
           {/* ================= Main Actions ================= */}

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import {
-  ArrowLeft,
   ArrowUpRight,
   Briefcase,
   Calendar,
@@ -13,6 +12,8 @@ import {
 
 import { getJobById } from "@/lib/api/jobs";
 import { Laptop } from "lucide-react";
+import BackButton from "@/components/ui/BackButton";
+import Image from "next/image";
 
 const JobDetailPage = async ({ params }) => {
   const { id } = await params;
@@ -62,13 +63,7 @@ const JobDetailPage = async ({ params }) => {
   return (
     <main className="mx-auto container px-6 pt-32 pb-16">
       {/* Back Button */}
-      <Link
-        href="/jobs"
-        className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition hover:text-foreground"
-      >
-        <ArrowLeft className="size-4" />
-        Back to jobs
-      </Link>
+      <BackButton />
 
       {/* ================= Job Header ================= */}
       <section className="rounded-3xl border border-default bg-background p-6 shadow-sm md:p-8">
@@ -76,8 +71,10 @@ const JobDetailPage = async ({ params }) => {
           {/* Company + Job */}
           <div className="flex items-start gap-5">
             {/* Company Logo */}
-            <div className="flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-default bg-white p-3">
-              <img
+            <div className="flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-xl">
+              <Image
+                width={100}
+                height={100}
                 src={job.companyLogo}
                 alt={`${job.companyName} logo`}
                 className="size-full object-contain"
@@ -230,7 +227,7 @@ const JobDetailPage = async ({ params }) => {
             {/* Apply Button */}
             <Link
               href={`/jobs/${job._id}/apply`}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-5 py-3 text-sm font-semibold text-foreground transition-all hover:bg-purple-800 hover:scale-105" 
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-5 py-3 text-sm font-semibold text-foreground transition-all hover:bg-purple-800 hover:scale-105"
             >
               Apply Now For This Job
               <ArrowUpRight className="size-4" />

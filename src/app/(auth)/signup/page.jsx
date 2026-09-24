@@ -13,12 +13,15 @@ import { InputGroup, Label, TextField } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignupPage() {
   const router= useRouter()
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
+
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -33,7 +36,7 @@ export default function SignupPage() {
     });
     if(data){
       toast.success("You have Registered Successfully!")
-      router.push("/dashboard/recruiter")
+      router.push(redirectTo)
     }else{
       toast.error("Registration Failed!")
     }
@@ -45,11 +48,7 @@ export default function SignupPage() {
     <main className="min-h-screen bg-[#07070A] pt-30">
       <div className="container mx-auto flex min-h-screen items-center justify-center px-4 py-10">
         <Card
-          className="
-            w-full
-            max-w-md
-            
-          "
+          className="w-full max-w-md"
         >
           <div className="p-8">
             {/* Header */}
@@ -203,7 +202,7 @@ export default function SignupPage() {
               </span>
 
               <Link
-                href="/signin"
+                href={`/signin?redirect=${redirectTo}`}
                 className="ml-2 text-sm font-medium text-violet-400 hover:text-violet-300"
               >
                 Sign In

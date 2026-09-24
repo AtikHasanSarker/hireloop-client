@@ -32,7 +32,7 @@ export default function JobCard({ job }) {
         <div className="flex min-w-0 items-start gap-4">
           {/* Company Logo */}
           <div
-            className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-xl"
+            className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-lg"
           >
             <img
               src={job.companyLogo}
