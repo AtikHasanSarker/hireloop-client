@@ -1,8 +1,8 @@
-import { getCompanyJobs } from "@/lib/api/jobs";
 import React from "react";
 import { Table, Chip, Button, Tooltip } from "@heroui/react";
 import { Eye, Edit2, Trash2 } from "lucide-react";
 import { getLoggedRecruiterCompany } from "@/lib/actions/companies";
+import { getCompanyJobs } from "@/lib/actions/jobs";
 
 const RecruiterJobs = async () => {
   const company = await getLoggedRecruiterCompany();

@@ -10,6 +10,7 @@ export const serverFetch = async (api) => {
   return res.json();
 };
 
+
 export const serverMutation = async (api, data) => {
   const res = await fetch(`${baseUrl}/api/${api}`, {
     method: "POST",

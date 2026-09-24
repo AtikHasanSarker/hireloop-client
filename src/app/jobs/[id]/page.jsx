@@ -10,10 +10,10 @@ import {
   Tag,
 } from "@gravity-ui/icons";
 
-import { getJobById } from "@/lib/api/jobs";
 import { Laptop } from "lucide-react";
 import BackButton from "@/components/ui/BackButton";
 import Image from "next/image";
+import { getJobById } from "@/lib/actions/jobs";
 
 const JobDetailPage = async ({ params }) => {
   const { id } = await params;

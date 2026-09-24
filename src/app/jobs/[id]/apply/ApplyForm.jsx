@@ -17,30 +17,40 @@ import {
   MessageSquare,
   Send,
 } from "lucide-react";
-import { LiaLinkedinIn } from "react-icons/lia";
+import { FaLinkedin } from "react-icons/fa";
+import { submitApplication } from "@/lib/actions/applications";
+import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 const ApplyForm = ({ job, applicant }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
 
     const applicationData = {
+      jobId: job?._id,
+      jobTitle: job?.jobTitle,
+      companyName: job?.companyName,
+      applicantId: applicant?.id,
+      applicantName: applicant?.name,
+      applicantEmail: applicant?.email,
       resumeUrl: formData.get("resumeUrl"),
       portfolioUrl: formData.get("portfolioUrl"),
       linkedinUrl: formData.get("linkedinUrl"),
       coverLetter: formData.get("coverLetter"),
     };
 
-    console.log("Application Data:", {
-      jobId: job?._id,
-      applicantId: applicant?._id,
-      ...applicationData,
-    });
+    const res = await submitApplication(applicationData);
+    if (res.insertedId) {
+      toast.success("Application Submitted Successfully!");
+      redirect(`/jobs`);
+    } else {
+      toast.error("Application Failed!");
+    }
   };
 
   return (
-    <div className="mx-auto w-full min-h-screen p-10 rounded-3xl max-w-2xl bg-gray-800">
+    <div className="mx-auto w-full min-h-screen p-10 rounded-3xl max-w-3xl bg-gray-800">
       {/* Header */}
       <div className="mb-8">
         <p className="mb-2 text-sm font-medium text-purple-600">
@@ -103,7 +113,7 @@ const ApplyForm = ({ job, applicant }) => {
         {/* LinkedIn */}
         <TextField name="linkedinUrl" type="url" className="w-full">
           <Label className="flex items-center gap-2">
-            <LiaLinkedinIn className="size-4" />
+            <FaLinkedin className="size-4" />
             LinkedIn URL
             <span className="text-xs font-normal text-muted-foreground">
               (Optional)
@@ -132,10 +142,6 @@ const ApplyForm = ({ job, applicant }) => {
             placeholder="Tell the employer briefly why you're a good fit for this position..."
             className="min-h-36 resize-y"
           />
-
-          <Description>
-            Keep it concise and relevant to this position.
-          </Description>
 
           <FieldError />
         </TextField>
