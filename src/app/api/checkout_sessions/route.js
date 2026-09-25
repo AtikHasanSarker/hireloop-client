@@ -13,14 +13,14 @@ export async function POST() {
       line_items: [
         {
           // Provide the exact Price ID (for example, price_1234) of the product you want to sell
-          price: "{{PRICE_ID}}",
+          price: 'price_1UJarOQ8P9tCCAhA3R1Y6ene',
           quantity: 1,
         },
       ],
       mode: "subscription",
       success_url: `${origin}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,
       // Provide a name (for example, hosted_web_0001) to label this Checkout integration and measure its conversion independently
-      integration_identifier: "{{INTEGRATION_ID}}",
+      // integration_identifier: "{{INTEGRATION_ID}}",
     });
     return NextResponse.redirect(session.url, 303);
   } catch (err) {

@@ -20,8 +20,7 @@ const pricingData = {
         period: "forever",
         description: "Everything you need to start your job search.",
         features: [
-          "Browse up to 10 jobs",
-          "Save up to 10 jobs",
+          "Browse & save up to 10 jobs",
           "Apply to 3 jobs per month",
           "Basic profile",
           "Email job alerts",
@@ -35,11 +34,10 @@ const pricingData = {
         period: "month",
         description: "More applications and powerful tools for active seekers.",
         features: [
-          "Apply to 30 jobs per month",
+          "Apply to 10 jobs per month",
           "Unlimited saved jobs",
           "Application tracking",
           "Salary insights",
-          "Everything in Free",
         ],
         button: "Choose Pro",
         highlighted: true,
@@ -51,12 +49,10 @@ const pricingData = {
         period: "month",
         description: "Maximum visibility and unlimited opportunities.",
         features: [
-          "Unlimited applications",
-          "Unlimited saved jobs",
+          "Unlimited applications & saved jobs",
           "Profile boost to recruiters",
           "Early access to new jobs",
           "Priority support",
-          "Everything in Pro",
         ],
         button: "Go Premium",
         highlighted: false,
@@ -93,7 +89,6 @@ const pricingData = {
           "Applicant tracking",
           "Basic analytics",
           "Email support",
-          "Everything in Free",
         ],
         button: "Choose Growth",
         highlighted: true,
@@ -108,7 +103,6 @@ const pricingData = {
           "Up to 50 active job posts",
           "Advanced analytics dashboard",
           "Featured job listings",
-          "Team collaboration",
           "Custom branding",
           "Priority support",
         ],
@@ -321,18 +315,6 @@ const PricingCard = ({ plan }) => {
         <span className="mb-1.5 text-sm text-gray-500">/{plan.period}</span>
       </div>
 
-      {/* Button */}
-      <Link
-        href="/register"
-        className={`mt-7 flex h-11 items-center justify-center rounded-xl text-sm font-semibold transition-all duration-300 ${
-          plan.highlighted
-            ? "bg-white text-black hover:bg-gray-200"
-            : "border border-white/10 bg-white/6 text-white hover:bg-white/[0.1]"
-        }`}
-      >
-        {plan.button}
-      </Link>
-
       {/* Divider */}
       <div className="my-7 h-px bg-white/10" />
 
@@ -357,6 +339,23 @@ const PricingCard = ({ plan }) => {
           ))}
         </ul>
       </div>
+
+      {/* Button */}
+      <form action="/api/checkout_sessions" method="POST">
+        <section>
+          <button
+            type="submit"
+            role="link"
+            className={`mt-7 flex w-full cursor-pointer h-11 items-center justify-center rounded-xl text-sm font-semibold transition-all duration-300 ${
+              plan.highlighted
+                ? "bg-purple-600 hover:bg-purple-800"
+                : "border border-white/10 bg-white/6 text-white hover:bg-purple-800"
+            }`}
+          >
+            Checkout
+          </button>
+        </section>
+      </form>
     </div>
   );
 };
