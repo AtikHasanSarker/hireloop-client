@@ -62,7 +62,7 @@ export default function Banner() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-xl leading-relaxed text-gray-400">
-            HireLoop connects top talent with world-class companies. Browse
+            JobNest connects top talent with world-class companies. Browse
             <br /> thousands of curated opportunities and land your next role
             faster.
           </p>

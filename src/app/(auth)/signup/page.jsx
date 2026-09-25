@@ -47,9 +47,7 @@ export default function SignupPage() {
   return (
     <main className="min-h-screen bg-[#07070A] pt-30">
       <div className="container mx-auto flex min-h-screen items-center justify-center px-4 py-10">
-        <Card
-          className="w-full max-w-md"
-        >
+        <Card className="w-full max-w-md">
           <div className="p-8">
             {/* Header */}
 
@@ -57,7 +55,7 @@ export default function SignupPage() {
               <h1 className="text-3xl font-bold ">Create Account</h1>
 
               <p className="mt-2 text-sm">
-                Join Hireloop and start your career journey.
+                Join JobNest and start your career journey.
               </p>
             </div>
 
@@ -190,7 +188,11 @@ export default function SignupPage() {
                 className="h-12 w-full bg-linear-to-r from-violet-600 to-indigo-600 font-medium"
                 disabled={loading}
               >
-                {loading ? <Spinner color="white" size="sm" /> : "Create Account"}
+                {loading ? (
+                  <Spinner color="white" size="sm" />
+                ) : (
+                  "Create Account"
+                )}
               </Button>
             </Form>
 

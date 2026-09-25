@@ -259,7 +259,7 @@ export default function CompanyProfile({ recruiter, recruiterCompany }) {
                   {company ? "Edit Company Details" : "Register New Company"}
                 </h3>
                 <p className="text-zinc-400 text-xs mt-1">
-                  Enter your business details to start hiring on HireLoop.
+                  Enter your business details to start hiring on JobNest.
                 </p>
               </div>
               <button

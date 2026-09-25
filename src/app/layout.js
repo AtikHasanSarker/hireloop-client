@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Hireloop",
+  title: "JobNest",
   description: "A platform to find and apply for jobs",
 };
 
