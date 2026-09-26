@@ -9,6 +9,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { LayoutDashboard } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
   const router = useRouter();
@@ -35,10 +36,7 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between rounded-2xl border border-white/10 bg-white/3 px-6 backdrop-blur-xl">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <h1 className="text-3xl font-extrabold tracking-tight">
-              <span className="text-sky-500">hire</span>
-              <span className="text-orange-500">loop</span>
-            </h1>
+            <Image src="nav-logo.png" alt="JobNest Logo" width={100} height={30} />
           </Link>
 
           {/* Right Section */}
